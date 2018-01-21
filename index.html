@@ -1,0 +1,108 @@
+<!doctype html>
+<html >
+  <head>
+    <title>CurrentAffair</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- BootStrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Angular and jquery datatbale-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+
+    <!-- Semantic UI -->
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.semanticui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.semanticui.min.css">
+    <!-- Semantic UI Close-->
+
+    <!-- Style Button -->
+    <style>
+    .button {
+      background-color: #3b5998;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+  </style>
+  </head>
+  <body>
+
+  <script>
+    $(document).ready( function (){
+
+      $("#dialog").hide();
+      $("#add").click(function(){
+          $("#dialog").show();
+          $( "#dialog" ).dialog();
+      });
+
+      $('#currentAffair').DataTable({
+          "ajax": "currentAffair.json",
+          "columns": [
+            {
+              "data": "topic",
+              "defaultContent": "<i>Not set</i>"
+            },
+            {
+              "data": "content",
+              "defaultContent": "<i>Not set</i>"
+            }
+            ]
+        });
+    });
+  </script>
+
+<div class="container-fluid">
+   <div class="page-header" style="background: #3b5998">
+     <h1><center><font color="white">Current Affairs 2018</font></center></h1>
+   </div>
+   <div>
+     <table id="currentAffair" class="ui celled table" cellspacing="0" width="100%">
+         <thead>
+             <tr>
+                 <th>Topic</th>
+                 <th>Content</th>
+             </tr>
+         </thead>
+         <tfoot>
+             <tr>
+                 <th>Topic</th>
+                 <th>Content</th>
+             </tr>
+         </tfoot>
+     </table>
+   </div>
+   <div>
+     <button id="add" class="button">Add</button>
+   </div>
+</div>
+
+<div id="dialog" title="Add Current Affair">
+  <form action = "process_get" method = "GET">
+         Topic: <input type = "text" name = "topic">  <br>
+         Content:
+         <textarea rows="4" cols="35" name = "content">
+         </textarea>
+
+         <input type = "submit" value = "Submit">
+  </form>
+</div>
+
+</body>
+</html>
